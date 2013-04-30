@@ -112,15 +112,18 @@
     scene.addEventListener(
       'update',
       function() {
-        togglePointer(pointer0, vrstate.sixense.present);
-        togglePointer(pointer1, vrstate.sixense.present);
-        if (vrstate.sixense.present) {
-          updatePointer(pointer0, vrstate.sixense.controllers[0]);
-          updatePointer(pointer1, vrstate.sixense.controllers[1]);
-        } 
+          // Poll VR, if it's ready.
+        if(vr.pollState(vrstate)) {
+          togglePointer(pointer0, vrstate.sixense.present);
+          togglePointer(pointer1, vrstate.sixense.present);
+          if (vrstate.sixense.present) {
+            updatePointer(pointer0, vrstate.sixense.controllers[0]);
+            updatePointer(pointer1, vrstate.sixense.controllers[1]);
+          } 
 
-        scene.simulate( undefined, 1 );
-        physics_stats.update();
+          scene.simulate( undefined, 1 );
+          physics_stats.update();
+        }
       }
     );
     
