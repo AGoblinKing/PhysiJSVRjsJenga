@@ -112,9 +112,6 @@
     scene.addEventListener(
       'update',
       function() {
-          // Poll VR, if it's ready.
-        console.log(vr.pollState(vrstate));
-
         togglePointer(pointer0, vrstate.sixense.present);
         togglePointer(pointer1, vrstate.sixense.present);
         if (vrstate.sixense.present) {
